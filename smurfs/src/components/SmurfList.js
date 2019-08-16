@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import Smurf from "./Smurf";
+import { getSmurfs, addSmurf } from "../actions";
 
 const SmurfList = props => {
-  const [newSmurf, setNewSmurf] = setState({ name: "", age: "", height: "" });
+  const [newSmurf, setNewSmurf] = useState({ name: "", age: "", height: "" });
+
+  useEffect(() => {
+    props.getSmurfs();
+  }, []);
 
   const handleChange = e => {
     setNewSmurf({ ...newSmurf, [e.target.name]: e.target.value });
@@ -11,14 +16,15 @@ const SmurfList = props => {
 
   const submitSmurf = e => {
     e.preventDefault();
-    // add action here
+    props.addSmurf(newSmurf);
     setNewSmurf({ name: "", age: "", height: "" });
   };
 
   return (
     <>
       <h3>Add a New Smurf</h3>
-      <form>
+      {/* <button onClick={props.getSmurfs}>Get Smurfs</button> */}
+      <form onSubmit={submitSmurf}>
         <label>
           Name
           <input
@@ -50,9 +56,7 @@ const SmurfList = props => {
       </form>
       <div className="smurf-container">
         {props.smurfs &&
-          props.smurfs.map(smurf => {
-            <Smurf key={smurf.id} smurf={smurf} />;
-          })}
+          props.smurfs.map(smurf => <Smurf key={smurf.id} smurf={smurf} />)}
       </div>
     </>
   );
@@ -65,4 +69,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(SmurfList);
+export default connect(
+  mapStateToProps,
+  { getSmurfs, addSmurf }
+)(SmurfList);
