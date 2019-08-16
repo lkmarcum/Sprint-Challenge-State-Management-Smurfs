@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import Smurf from "./Smurf";
 
 const SmurfList = props => {
   const [newSmurf, setNewSmurf] = setState({ name: "", age: "", height: "" });
@@ -46,6 +48,21 @@ const SmurfList = props => {
         </label>
         <button>Submit</button>
       </form>
+      <div className="smurf-container">
+        {props.smurfs &&
+          props.smurfs.map(smurf => {
+            <Smurf key={smurf.id} smurf={smurf} />;
+          })}
+      </div>
     </>
   );
 };
+
+const mapStateToProps = state => {
+  return {
+    smurfs: state.smurfs,
+    isLoading: state.isLoading
+  };
+};
+
+export default connect(mapStateToProps)(SmurfList);
