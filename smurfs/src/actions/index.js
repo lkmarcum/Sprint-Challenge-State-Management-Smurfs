@@ -6,5 +6,7 @@ export {
   addSmurf,
   ADD_SMURF_START,
   ADD_SMURF_SUCCESS,
-  ADD_SMURF_FAIL
+  ADD_SMURF_FAIL,
+  deleteSmurf,
+  DELETE_SMURF
 } from "./smurfActions";
