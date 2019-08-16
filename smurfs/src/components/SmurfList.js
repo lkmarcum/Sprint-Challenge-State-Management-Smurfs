@@ -22,38 +22,40 @@ const SmurfList = props => {
 
   return (
     <>
-      <h3>Add a New Smurf</h3>
-      {/* <button onClick={props.getSmurfs}>Get Smurfs</button> */}
-      <form onSubmit={submitSmurf}>
-        <label>
-          Name
-          <input
-            type="text"
-            value={newSmurf.name}
-            name="name"
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Age
-          <input
-            type="text"
-            value={newSmurf.age}
-            name="age"
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Height
-          <input
-            type="text"
-            value={newSmurf.height}
-            name="height"
-            onChange={handleChange}
-          />
-        </label>
-        <button>Submit</button>
-      </form>
+      <div className="form-container">
+        <h3>Add a New Smurf</h3>
+        {/* <button onClick={props.getSmurfs}>Get Smurfs</button> */}
+        <form onSubmit={submitSmurf}>
+          <label>
+            Name
+            <input
+              type="text"
+              value={newSmurf.name}
+              name="name"
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Age
+            <input
+              type="text"
+              value={newSmurf.age}
+              name="age"
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Height
+            <input
+              type="text"
+              value={newSmurf.height}
+              name="height"
+              onChange={handleChange}
+            />
+          </label>
+          <button>Submit</button>
+        </form>
+      </div>
       <div className="smurf-container">
         {props.smurfs &&
           props.smurfs.map(smurf => <Smurf key={smurf.id} smurf={smurf} />)}
